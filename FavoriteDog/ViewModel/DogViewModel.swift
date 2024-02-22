@@ -8,16 +8,24 @@
 import SwiftUI
 
 class DogViewModel: ObservableObject {
-    @Published var favoriteDog: DogModel?
+    @Published var favoriteDog: DogImage?
     @Published var randomDogImage: UIImage?
     @Published var breedsName: [String] = []
     
-    private let networkService = NetworkService.shared
+    private let networkService: NetworkServiceDelegate?
     
+    init(favoriteDog: DogImage? = nil, randomDogImage: UIImage? = nil, breedsName: [String] = [], networkService: NetworkServiceDelegate = NetworkService() ) {
+        self.favoriteDog = favoriteDog
+        self.randomDogImage = randomDogImage
+        self.breedsName = breedsName
+        self.networkService = networkService
+    }
+    
+    @MainActor
     func fetchRandomDogImage() async throws  {
         do {
-            let dogImage = try await networkService.fetchRandomDogImage()
-            guard let url = URL(string: dogImage.message ?? "") else {
+            let dogImage = try await networkService?.requestRandomImage()
+            guard let url = URL(string: dogImage?.message ?? "") else {
                 throw NetworkError.invalidURL
             }
             
@@ -32,13 +40,13 @@ class DogViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func fetchBreeds() async {
         do {
-            let allBreeds =  try await networkService.fetchBreeds()
-            for (name, _) in allBreeds.message {
-                self.breedsName.append(name)
+            if let breedsName =  try await networkService?.requestBreedsList() {
+                self.breedsName = breedsName
             }
-            
+           
         } catch {
             print("Error decoding breeds: \(error)")
             return

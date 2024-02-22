@@ -13,18 +13,24 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            if let randomDogImage = viewModel.randomDogImage {
-                Image(uiImage: randomDogImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            } else {
-                ProgressView()
+            if !viewModel.breedsName.isEmpty {
+                BreedSelectionView(breeds: viewModel.breedsName)
             }
-        }
-        .onAppear {
-            Task {
-               try? await viewModel.fetchRandomDogImage()
-                
+            VStack {
+                if let randomDogImage = viewModel.randomDogImage {
+                    Image(uiImage: randomDogImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } else {
+                    ProgressView()
+                }
+            }
+            .onAppear {
+                Task {
+                    try? await viewModel.fetchRandomDogImage()
+                    try? await viewModel.fetchBreeds()
+                    
+                }
             }
         }
     }
@@ -35,29 +41,14 @@ struct ContentView: View {
         ContentView()
     }
 }
-import Foundation
-
-struct Breed: Codable, Identifiable, Hashable {
-    let id = UUID()
-    let name: String
-    let subBreeds: [String]?
-}
-
-struct BreedsResponse: Codable {
-    let message: [String: [String]]
-    let status: String
-}
 
 
-
-
-import SwiftUI
 
 struct BreedSelectionView: View {
     @State private var selectedBreedIndex = 0
-    private let breeds: [Breed]
+    private let breeds: [String]
     
-    init(breeds: [Breed]) {
+    init(breeds: [String]) {
         self.breeds = breeds
     }
     
@@ -65,11 +56,14 @@ struct BreedSelectionView: View {
         VStack {
             Picker(selection: $selectedBreedIndex, label: Text("Select Breed")) {
                 ForEach(0..<breeds.count, id: \.self) { index in
-                    Text(self.breeds[index].name).tag(index)
+                    Text(self.breeds[index])
+                        .tag(index)
                 }
+            }.onTapGesture {
+                
             }
             
-            Text("Selected Breed: \(breeds[selectedBreedIndex].name)")
+            Text("Selected Breed: \(breeds[selectedBreedIndex])")
         }
         .padding()
     }
@@ -79,10 +73,9 @@ struct BreedSelectionView: View {
 struct BreedSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         let mockBreeds = [
-            Breed(name: "Labrador", subBreeds: ["Golden", "Black", "Chocolate"]),
-            Breed(name: "Poodle", subBreeds: ["Standard", "Miniature", "Toy"]),
-            Breed(name: "German Shepherd", subBreeds: nil)
-        ]
+             "Labrador", "Golden", "Black", "Chocolate"
+            , "Poodle","Standard", "Miniature", "Toy", "German Shepherd"]
+        
         
         return BreedSelectionView(breeds: mockBreeds)
     }

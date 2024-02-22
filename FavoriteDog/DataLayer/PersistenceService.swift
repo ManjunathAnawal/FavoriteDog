@@ -13,7 +13,7 @@ class PersistenceService {
     
     private init() {}
     
-    func saveFavoriteDog(_ dog: DogModel) {
+    func saveFavoriteDog(_ dog: DogImage) {
         var favorites = loadFavorites()
         favorites.append(dog)
         saveFavorites(favorites)
@@ -25,11 +25,11 @@ class PersistenceService {
         saveFavorites(favorites)
     }
     
-    func loadFavorites() -> [DogModel] {
+    func loadFavorites() -> [DogImage] {
         if let data = UserDefaults.standard.data(forKey: favoritesKey) {
             do {
                 let decoder = JSONDecoder()
-                return try decoder.decode([DogModel].self, from: data)
+                return try decoder.decode([DogImage].self, from: data)
             } catch {
                 print("Failed to decode favorites: \(error)")
                 return []
@@ -38,7 +38,7 @@ class PersistenceService {
         return []
     }
     
-    private func saveFavorites(_ favorites: [DogModel]) {
+    private func saveFavorites(_ favorites: [DogImage]) {
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(favorites)

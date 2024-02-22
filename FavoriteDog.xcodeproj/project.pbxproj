@@ -14,6 +14,10 @@
 		FD26607C2B864C380025CD54 /* FavoriteDogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD26607B2B864C380025CD54 /* FavoriteDogTests.swift */; };
 		FD2660862B864C380025CD54 /* FavoriteDogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2660852B864C380025CD54 /* FavoriteDogUITests.swift */; };
 		FD2660882B864C380025CD54 /* FavoriteDogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2660872B864C380025CD54 /* FavoriteDogUITestsLaunchTests.swift */; };
+		FD26609A2B864CCF0025CD54 /* DogImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2660992B864CCF0025CD54 /* DogImage.swift */; };
+		FD26609C2B864D070025CD54 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD26609B2B864D070025CD54 /* NetworkService.swift */; };
+		FD26609E2B864D7E0025CD54 /* DogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD26609D2B864D7E0025CD54 /* DogViewModel.swift */; };
+		FD2660A02B864F450025CD54 /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD26609F2B864F450025CD54 /* PersistenceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		FD2660812B864C380025CD54 /* FavoriteDogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FavoriteDogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD2660852B864C380025CD54 /* FavoriteDogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDogUITests.swift; sourceTree = "<group>"; };
 		FD2660872B864C380025CD54 /* FavoriteDogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteDogUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FD2660992B864CCF0025CD54 /* DogImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogImage.swift; sourceTree = "<group>"; };
+		FD26609B2B864D070025CD54 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		FD26609D2B864D7E0025CD54 /* DogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogViewModel.swift; sourceTree = "<group>"; };
+		FD26609F2B864F450025CD54 /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +102,12 @@
 		FD2660692B864C370025CD54 /* FavoriteDog */ = {
 			isa = PBXGroup;
 			children = (
+				FD2660942B864C5E0025CD54 /* Model */,
+				FD2660982B864C880025CD54 /* DataLayer */,
+				FD2660972B864C7B0025CD54 /* Views */,
+				FD2660962B864C720025CD54 /* ViewModel */,
+				FD2660952B864C670025CD54 /* NetworkLayer */,
 				FD26606A2B864C370025CD54 /* FavoriteDogApp.swift */,
-				FD26606C2B864C370025CD54 /* ContentView.swift */,
 				FD26606E2B864C380025CD54 /* Assets.xcassets */,
 				FD2660702B864C380025CD54 /* Preview Content */,
 			);
@@ -125,6 +137,46 @@
 				FD2660872B864C380025CD54 /* FavoriteDogUITestsLaunchTests.swift */,
 			);
 			path = FavoriteDogUITests;
+			sourceTree = "<group>";
+		};
+		FD2660942B864C5E0025CD54 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FD2660992B864CCF0025CD54 /* DogImage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FD2660952B864C670025CD54 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				FD26609B2B864D070025CD54 /* NetworkService.swift */,
+			);
+			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		FD2660962B864C720025CD54 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FD26609D2B864D7E0025CD54 /* DogViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FD2660972B864C7B0025CD54 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FD26606C2B864C370025CD54 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FD2660982B864C880025CD54 /* DataLayer */ = {
+			isa = PBXGroup;
+			children = (
+				FD26609F2B864F450025CD54 /* PersistenceService.swift */,
+			);
+			path = DataLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +310,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD26606D2B864C370025CD54 /* ContentView.swift in Sources */,
+				FD2660A02B864F450025CD54 /* PersistenceService.swift in Sources */,
+				FD26609A2B864CCF0025CD54 /* DogImage.swift in Sources */,
+				FD26609E2B864D7E0025CD54 /* DogViewModel.swift in Sources */,
+				FD26609C2B864D070025CD54 /* NetworkService.swift in Sources */,
 				FD26606B2B864C370025CD54 /* FavoriteDogApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
